@@ -1,0 +1,12 @@
+{
+  "name": "browse-curator-server",
+  "version": "1.0.0",
+  "description": "BrowseCurator Alert Server for GCP VM",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["parental-control", "gcp", "smtp", "browse-curator"],
+  "author": "",
+  "license": "ISC"
+}

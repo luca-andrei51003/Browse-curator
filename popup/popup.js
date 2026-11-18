@@ -29,6 +29,10 @@
   const saveEmailBtn = document.getElementById('saveEmailBtn');
   const emailStatusMsg = document.getElementById('emailStatusMsg');
 
+  const serverEndpointPopup = document.getElementById('serverEndpointPopup');
+  const saveEndpointBtn = document.getElementById('saveEndpointBtn');
+  const endpointStatusMsg = document.getElementById('endpointStatusMsg');
+
   let state = {};
 
   // Tab switching
@@ -66,6 +70,10 @@
 
     if (parentEmailPopup) {
       parentEmailPopup.value = state.parentEmail || '';
+    }
+
+    if (serverEndpointPopup) {
+      serverEndpointPopup.value = state.serverEndpoint || 'http://localhost:3001/api/notify';
     }
   }
 
@@ -210,6 +218,29 @@
         emailStatusMsg.textContent = 'Email salvat cu succes!';
         setTimeout(() => {
           emailStatusMsg.className = 'status-msg hidden';
+        }, 3000);
+      });
+    });
+  }
+
+  // Server Endpoint Management
+  if (saveEndpointBtn) {
+    saveEndpointBtn.addEventListener('click', () => {
+      let endpoint = serverEndpointPopup.value.trim();
+      endpointStatusMsg.className = 'status-msg';
+
+      if (!endpoint.startsWith('http://') && !endpoint.startsWith('https://')) {
+        endpointStatusMsg.classList.add('error');
+        endpointStatusMsg.textContent = 'URL invalid (trebuie să înceapă cu http:// sau https://).';
+        return;
+      }
+
+      state.serverEndpoint = endpoint;
+      chrome.storage.local.set({ serverEndpoint: endpoint }, () => {
+        endpointStatusMsg.classList.add('success');
+        endpointStatusMsg.textContent = 'Endpoint server salvat!';
+        setTimeout(() => {
+          endpointStatusMsg.className = 'status-msg hidden';
         }, 3000);
       });
     });

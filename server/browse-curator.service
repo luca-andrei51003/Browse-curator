@@ -1,0 +1,15 @@
+[Unit]
+Description=BrowseCurator GCP Alert Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/browse-curator-server
+ExecStart=/usr/bin/node /opt/browse-curator-server/server.js
+Restart=always
+RestartSec=5
+Environment=PORT=3001
+
+[Install]
+WantedBy=multi-user.target

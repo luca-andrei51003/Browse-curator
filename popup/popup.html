@@ -118,6 +118,16 @@
         <p id="emailStatusMsg" class="status-msg hidden"></p>
       </div>
 
+      <div class="setting-group" style="margin-bottom: 20px;">
+        <label class="group-title">Alert Server Endpoint (GCP VM)</label>
+        <p class="section-desc">Endpoint-ul serverului din cloud (ex: <code>http://34.x.x.x:3001/api/notify</code>).</p>
+        <div class="input-inline">
+          <input type="text" id="serverEndpointPopup" placeholder="http://VM_IP:3001/api/notify" />
+          <button id="saveEndpointBtn" class="btn-sm btn-primary">Save</button>
+        </div>
+        <p id="endpointStatusMsg" class="status-msg hidden"></p>
+      </div>
+
       <div class="setting-group">
         <label class="group-title">Parent PIN Settings</label>
         <p class="section-desc">Default PIN is <code>1234</code>. You can change it below to prevent children from modifying settings or bypassing blocks.</p>

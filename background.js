@@ -103,15 +103,18 @@ async function handleBlockPage(tab, message) {
 
 async function notifyParentEmailService(payload) {
   try {
-    await fetch('http://localhost:3001/api/notify', {
+    const data = await chrome.storage.local.get(['serverEndpoint']);
+    const endpoint = (data.serverEndpoint && data.serverEndpoint.trim()) || 'http://localhost:3001/api/notify';
+
+    await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    console.log('BrowseCurator: Alert sent to email service successfully.');
+    console.log(`BrowseCurator: Alert sent to server (${endpoint}) successfully.`);
   } catch (err) {
-    // If the local notification server is not running, log cleanly
-    console.log('BrowseCurator: Parent email server offline, alert details:', payload);
+    // If the notification server is unreachable, log cleanly
+    console.log('BrowseCurator: Alert server offline or unreachable, alert details:', payload);
   }
 }
 
