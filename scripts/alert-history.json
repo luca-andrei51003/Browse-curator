@@ -1,0 +1,80 @@
+[
+  {
+    "recipient": "luca.culcean@gmail.com",
+    "url": "https://azure.microsoft.com/en-us",
+    "reason": "Multiple inappropriate terms or images detected",
+    "matches": "image: anal",
+    "timestamp": "18.11.2026, 15:08:56"
+  },
+  {
+    "recipient": "luca.culcean@gmail.com",
+    "url": "https://onlyfans.com/",
+    "reason": "Website is on your family blocklist",
+    "matches": "Blocked domain",
+    "timestamp": "18.11.2026, 15:06:42"
+  },
+  {
+    "recipient": "luca.culcean@gmail.com",
+    "url": "file:///c%3A/Users/PC-LUCA-STRIX/OneDrive/Desktop/Desktop%20Directory/Coding%20various/Browse-curator/test/test-page.html",
+    "reason": "Illicit imagery or explicit text detected",
+    "matches": "erotic photo",
+    "timestamp": "18.11.2026, 15:05:35"
+  },
+  {
+    "url": "file:///c%3A/Users/PC-LUCA-STRIX/OneDrive/Desktop/Desktop%20Directory/Coding%20various/Browse-curator/test/test-page.html",
+    "reason": "Illicit imagery or explicit text detected",
+    "matches": "erotic photo",
+    "timestamp": "18.11.2026, 15:05:13"
+  },
+  {
+    "url": "file:///c%3A/Users/PC-LUCA-STRIX/OneDrive/Desktop/Desktop%20Directory/Coding%20various/Browse-curator/test/test-page.html",
+    "reason": "Illicit imagery or explicit text detected",
+    "matches": "erotic photo",
+    "timestamp": "18.11.2026, 15:04:49"
+  },
+  {
+    "recipient": "luca.culcean@gmail.com",
+    "url": "https://example-test-site.com/mature-content",
+    "reason": "Illicit imagery or explicit text detected",
+    "matches": "erotic photo, adult terms",
+    "timestamp": "18.11.2026, 15:04:08"
+  },
+  {
+    "recipient": "luca.culcean@gmail.com",
+    "url": "https://example-test-site.com/mature-content",
+    "reason": "Illicit imagery or explicit text detected",
+    "matches": "erotic photo, adult terms",
+    "timestamp": "18.11.2026, 15:03:50"
+  },
+  {
+    "recipient": "luca.culcean@gmail.com",
+    "url": "https://example-test-site.com/mature-content",
+    "reason": "Illicit imagery or explicit text detected",
+    "matches": "erotic photo, adult terms",
+    "timestamp": "18.11.2026, 15:03:20"
+  },
+  {
+    "url": "file:///c%3A/Users/PC-LUCA-STRIX/OneDrive/Desktop/Desktop%20Directory/Coding%20various/Browse-curator/test/test-page.html",
+    "reason": "Illicit imagery or explicit text detected",
+    "matches": "erotic photo",
+    "timestamp": "18.11.2026, 15:02:15"
+  },
+  {
+    "url": "file:///c%3A/Users/PC-LUCA-STRIX/OneDrive/Desktop/Desktop%20Directory/Coding%20various/Browse-curator/test/test-page.html",
+    "reason": "Illicit imagery or explicit text detected",
+    "matches": "erotic photo",
+    "timestamp": "18.11.2026, 15:00:47"
+  },
+  {
+    "url": "https://example-test-site.com/mature-content",
+    "reason": "Illicit imagery or explicit text detected",
+    "matches": "erotic photo, adult terms",
+    "timestamp": "18.11.2026, 14:24:33"
+  },
+  {
+    "url": "https://example-test-site.com/mature-content",
+    "reason": "Illicit imagery or explicit text detected",
+    "matches": "erotic photo, adult terms",
+    "timestamp": "18.11.2026, 14:23:45"
+  }
+]

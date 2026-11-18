@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrowseCurator Sandbox de Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      color: #1e293b;
+      background: #f8fafc;
+    }
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    h1 { color: #0f172a; margin-bottom: 8px; font-size: 26px; }
+    h2 { color: #2563eb; font-size: 18px; margin-bottom: 12px; }
+    
+    /* Diagnostic Banner */
+    .status-banner {
+      padding: 16px 20px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .status-inactive {
+      background: #fef2f2;
+      border: 2px solid #ef4444;
+      color: #991b1b;
+    }
+    .status-active {
+      background: #ecfdf5;
+      border: 2px solid #10b981;
+      color: #065f46;
+      display: none;
+    }
+
+    .quote-box {
+      background: #f1f5f9;
+      padding: 12px 16px;
+      border-left: 4px solid #64748b;
+      margin: 12px 0;
+      font-style: normal;
+    }
+    .btn {
+      padding: 10px 18px;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-top: 6px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-red { background: #dc2626; }
+    .btn-orange { background: #ea580c; }
+    .images-grid {
+      display: flex;
+      gap: 20px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .img-card {
+      text-align: center;
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    code {
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    ol {
+      margin-left: 20px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 BrowseCurator — Laborator de Testare</h1>
+  <p>Această pagină vă permite să testați toate funcțiile extensiei fără să accesați site-uri reale nepotrivite.</p>
+
+  <!-- Diagnostic Live Indicator -->
+  <div id="diagnosticActive" class="status-banner status-active">
+    <strong>✅ Extensia BrowseCurator este ACTIVĂ pe această pagină!</strong><br>
+    Filtrele de text și imaginile sunt scanate și cenzurate în timp real.
+  </div>
+
+  <div id="diagnosticInactive" class="status-banner status-inactive">
+    <strong>⚠️ Extensia BrowseCurator NU rulează pe această pagină!</strong><br>
+    Din acest motiv conținutul nu este încă cenzurat sau blurat.<br><br>
+    <strong>Cum se rezolvă (alegeți una dintre variante):</strong>
+    <ol>
+      <li><strong>Dacă ați deschis fișierul direct (<code>file:///...</code>):</strong><br>
+        Chrome blochează implicit extensiile pe fișiere locale. Deschideți <code>chrome://extensions</code> &rarr; apăsați <strong>Detalii</strong> la BrowseCurator &rarr; bifați comutatorul <strong>"Permite accesul la adresele URL ale fișierelor"</strong> (<em>Allow access to file URLs</em>), apoi dați <strong>F5 (Refresh)</strong> acestei pagini.
+      </li>
+      <li style="margin-top: 8px;"><strong>SAU reîncărcați extensia în <code>chrome://extensions</code>:</strong><br>
+        Apăsați pe butonul rotund cu săgeată 🔄 (<em>Reload</em>) de pe cardul BrowseCurator.
+      </li>
+      <li style="margin-top: 8px;"><strong>SAU deschideți prin serverul local fără restricții:</strong><br>
+        Rulați în consolă <code>node scripts/serve.js</code> și deschideți <a href="http://localhost:3000/test/test-page.html" target="_blank">http://localhost:3000/test/test-page.html</a>.
+      </li>
+    </ol>
+  </div>
+
+  <!-- Test 1: Mascare Text (Engleză & Română) -->
+  <div class="card">
+    <h2>1. Test Mascare Limbaj Vulgar (Filtru Text)</h2>
+    <p>Texte simulate conținând cuvinte din lista moderată:</p>
+    
+    <div class="quote-box">
+      <strong>Română:</strong> "Ce mare prostii spui, tot ce zice este de cacat si vorbeste ca un idiot."
+    </div>
+    <div class="quote-box">
+      <strong>Engleză:</strong> "The player was angry and shouted bullshit and what the hell bitch at the referee."
+    </div>
+    <p><em>Rezultat așteptat când extensia este activă:</em> Cuvintele vulgare sunt cenzurate automat pe pagină (ex: <code>c***t</code>, <code>b******t</code>, <code>b***h</code>).</p>
+  </div>
+
+  <!-- Test 2: Protecție Imagini -->
+  <div class="card">
+    <h2>2. Test Protecție Imagini Suspecte (Image Shield)</h2>
+    <p>Imagini etichetate cu atribute suspecte în metadate (<code>alt</code> sau <code>title</code>):</p>
+    
+    <div class="images-grid">
+      <div class="img-card">
+        <p><small><code>alt="erotic photo sample"</code></small></p>
+        <img src="../icons/icon128.png" alt="erotic photo sample" width="120" height="120" />
+      </div>
+      <div class="img-card">
+        <p><small><code>alt="poze nud"</code></small></p>
+        <img src="../icons/icon128.png" alt="poze nud" width="120" height="120" />
+      </div>
+    </div>
+    <p style="margin-top: 12px;"><em>Rezultat așteptat când extensia este activă:</em> Imaginile sunt estompate / încețoșate automat cu un badge de protecție 🛡️. La click, se cere codul PIN de părinte (implicit: <code>1234</code>) pentru a fi dezvăluite.</p>
+  </div>
+
+  <!-- Test 3: Blocare Completă Pagină -->
+  <div class="card">
+    <h2>3. Test Blocare Completă a Paginii (Severe Content)</h2>
+    <p>Apăsați butoanele de mai jos pentru a injecta dinamic termeni severi (în română sau engleză). BrowseCurator va redirecționa instantaneu pagina către ecranul prietenos de blocare (Blocked Page).</p>
+    
+    <button id="triggerRoBtn" class="btn btn-red">
+      ⚠️ Test Blocare (Termen Română)
+    </button>
+    <button id="triggerEnBtn" class="btn btn-orange">
+      ⚠️ Test Blocare (Termen Engleză)
+    </button>
+  </div>
+
+  <script>
+    // Live detection whether BrowseCurator content script is active
+    setTimeout(() => {
+      const isActive = document.documentElement.dataset.browseCuratorActive === 'true' ||
+                       document.querySelector('.browse-curator-blurred-img') !== null;
+      if (isActive) {
+        document.getElementById('diagnosticActive').style.display = 'block';
+        document.getElementById('diagnosticInactive').style.display = 'none';
+      }
+    }, 250);
+
+    document.getElementById('triggerRoBtn').addEventListener('click', () => {
+      const p = document.createElement('p');
+      p.textContent = 'Injectare test: pornografie infantila si materiale ilegale test token';
+      document.body.appendChild(p);
+    });
+
+    document.getElementById('triggerEnBtn').addEventListener('click', () => {
+      const p = document.createElement('p');
+      p.textContent = 'Injecting test: hardcore pornographic video adult token';
+      document.body.appendChild(p);
+    });
+  </script>
+</body>
+</html>

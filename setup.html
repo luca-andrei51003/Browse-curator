@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurare Inițială — BrowseCurator</title>
+  <link rel="stylesheet" href="setup.css">
+</head>
+<body>
+  <div class="setup-container">
+    <div class="setup-card">
+      <div class="icon-bubble">
+        <svg class="shield-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#3b82f6" fill-opacity="0.15" stroke="#2563eb" />
+          <path d="M9 12l2 2 4-4" stroke="#2563eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" />
+        </svg>
+      </div>
+
+      <h1>Configurare Alertă Părinte</h1>
+      <p class="subtitle">
+        Pentru a vă ține la curent în mod discret atunci când o pagină sau o imagine nepotrivită este blocată, vă rugăm să introduceți adresa de email unde doriți să primiți înștiințările.
+      </p>
+
+      <form id="setupForm" class="setup-form">
+        <div class="form-group">
+          <label for="parentEmailInput">📧 Adresă de email pentru alerte:</label>
+          <input 
+            type="email" 
+            id="parentEmailInput" 
+            placeholder="exemplu: nume.parinte@gmail.com" 
+            required 
+            autocomplete="email"
+          />
+          <small class="hint">Copilul nu va vedea această adresă și nu va ști că s-a trimis o înștiințare.</small>
+        </div>
+
+        <div class="form-group" style="margin-top: 18px;">
+          <label for="pinInput">🔑 Cod PIN Părinte (pentru deblocare de urgență):</label>
+          <input 
+            type="password" 
+            id="pinInput" 
+            placeholder="Implicit: 1234 (min. 4 cifre)" 
+            maxlength="8" 
+            value="1234"
+          />
+          <small class="hint">Folosit dacă doriți să deblocați temporar un site pe ecranul copilului.</small>
+        </div>
+
+        <div id="errorMsg" class="error-msg hidden"></div>
+        <div id="successMsg" class="success-msg hidden">
+          ✅ Configurare salvată cu succes! Protecția BrowseCurator este activă.
+        </div>
+
+        <button type="submit" id="saveBtn" class="btn btn-primary">
+          Salvează și Activează Protecția
+        </button>
+      </form>
+
+      <footer class="privacy-note">
+        🔒 100% Confidențial. Datele dumneavoastră sunt stocate doar local în browserul dumneavoastră.
+      </footer>
+    </div>
+  </div>
+
+  <script src="setup.js"></script>
+</body>
+</html>

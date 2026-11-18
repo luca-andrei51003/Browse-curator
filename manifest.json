@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "BrowseCurator - Family Web Shield",
+  "version": "1.0.0",
+  "description": "Parent-friendly shield that blocks illicit imagery, bad language, and harmful websites.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "BrowseCurator Settings"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "rules/const/word-filter.js",
+        "rules/const/blocklist.js",
+        "rules/filter-rules.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "blocked.html",
+        "blocked.css",
+        "blocked.js",
+        "setup.html",
+        "setup.css",
+        "setup.js",
+        "icons/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrowseCurator Settings</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-area">
+        <img src="../icons/icon48.png" alt="BrowseCurator" class="header-icon" />
+        <div>
+          <h2>BrowseCurator</h2>
+          <span class="version-tag">Family Safe Shield</span>
+        </div>
+      </div>
+      <label class="switch" title="Toggle Protection">
+        <input type="checkbox" id="masterToggle" checked>
+        <span class="slider round"></span>
+      </label>
+    </header>
+
+    <!-- Protection Status Card -->
+    <div id="statusBanner" class="status-banner active">
+      <span class="status-dot"></span>
+      <span id="statusText">Protection is Active</span>
+    </div>
+
+    <!-- Main Navigation Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="shieldsTab">Shields</button>
+      <button class="tab-btn" data-tab="listsTab">Allow/Block Lists</button>
+      <button class="tab-btn" data-tab="settingsTab">Security</button>
+    </div>
+
+    <!-- TAB 1: Shields & Sensitivity -->
+    <section id="shieldsTab" class="tab-content active">
+      <div class="setting-group">
+        <label class="group-title">Filter Sensitivity</label>
+        <div class="sensitivity-selector">
+          <button type="button" class="sens-btn" data-sens="low">
+            <strong>Low</strong>
+            <span>Teens</span>
+          </button>
+          <button type="button" class="sens-btn active" data-sens="medium">
+            <strong>Medium</strong>
+            <span>Balanced</span>
+          </button>
+          <button type="button" class="sens-btn" data-sens="high">
+            <strong>High</strong>
+            <span>Strict</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <label class="group-title">Active Protections</label>
+
+        <label class="checkbox-row">
+          <div>
+            <strong>Instant Page Blocker</strong>
+            <p>Diverts dangerous or explicit websites to safety screen</p>
+          </div>
+          <input type="checkbox" id="pageShieldToggle" checked>
+        </label>
+
+        <label class="checkbox-row">
+          <div>
+            <strong>Smart Image Shield</strong>
+            <p>Blurs detected illicit or adult imagery automatically</p>
+          </div>
+          <input type="checkbox" id="imageShieldToggle" checked>
+        </label>
+
+        <label class="checkbox-row">
+          <div>
+            <strong>Clean Language Filter</strong>
+            <p>Masks profanity and harsh words on permitted pages</p>
+          </div>
+          <input type="checkbox" id="textFilterToggle" checked>
+        </label>
+      </div>
+    </section>
+
+    <!-- TAB 2: Custom Allow & Block Lists -->
+    <section id="listsTab" class="tab-content">
+      <div class="list-section">
+        <label class="group-title">Custom Allowlist (Always Safe)</label>
+        <div class="input-inline">
+          <input type="text" id="newAllowInput" placeholder="e.g. nationalgeographic.com" />
+          <button id="addAllowBtn" class="btn-sm btn-green">+ Add</button>
+        </div>
+        <ul id="allowListUl" class="domain-list"></ul>
+      </div>
+
+      <div class="list-section" style="margin-top: 16px;">
+        <label class="group-title">Custom Blocklist (Always Blocked)</label>
+        <div class="input-inline">
+          <input type="text" id="newBlockInput" placeholder="e.g. unwanted-site.com" />
+          <button id="addBlockBtn" class="btn-sm btn-red">+ Add</button>
+        </div>
+        <ul id="blockListUl" class="domain-list"></ul>
+      </div>
+    </section>
+
+    <!-- TAB 3: Parent PIN & Security -->
+    <section id="settingsTab" class="tab-content">
+      <div class="setting-group" style="margin-bottom: 20px;">
+        <label class="group-title">Parent Alert Email</label>
+        <p class="section-desc">Email address where discreet notifications are sent when content is blocked.</p>
+        <div class="input-inline">
+          <input type="email" id="parentEmailPopup" placeholder="parent@gmail.com" />
+          <button id="saveEmailBtn" class="btn-sm btn-primary">Save</button>
+        </div>
+        <p id="emailStatusMsg" class="status-msg hidden"></p>
+      </div>
+
+      <div class="setting-group">
+        <label class="group-title">Parent PIN Settings</label>
+        <p class="section-desc">Default PIN is <code>1234</code>. You can change it below to prevent children from modifying settings or bypassing blocks.</p>
+
+        <div class="pin-form">
+          <input type="password" id="currentPinInput" placeholder="Current PIN" maxlength="8" />
+          <input type="password" id="newPinInput" placeholder="New PIN (min 4 digits)" maxlength="8" />
+          <button id="savePinBtn" class="btn-primary" style="width: 100%; margin-top: 8px;">Update PIN</button>
+          <p id="pinStatusMsg" class="status-msg hidden"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Note -->
+    <footer class="footer">
+      <span>100% Private & Local to this device</span>
+    </footer>
+  </div>
+
+  <script src="../rules/const/word-filter.js"></script>
+  <script src="../rules/const/blocklist.js"></script>
+  <script src="../rules/filter-rules.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
