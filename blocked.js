@@ -4,11 +4,9 @@
   'use strict';
 
   const params = new URLSearchParams(window.location.search);
-  const targetUrl = params.get('url') || 'Unknown page';
-  const reason = params.get('reason') || 'Safety criteria exceeded';
-  const matches = params.get('matches') || '';
+  const targetUrl = params.get('url') || '';
 
-  // Extract hostname
+  // Extract hostname (used for allowlist/temp pass, NOT displayed to child)
   let targetDomain = '';
   try {
     targetDomain = new URL(targetUrl).hostname;

@@ -18,7 +18,6 @@ function loadConfig() {
   }
   return {
     senderEmail: 'luca.culcean@gmail.com',
-    recipientEmail: 'luca.culcean@gmail.com',
     gmailAppPassword: process.env.GMAIL_APP_PASSWORD || '',
     serverPort: 3001
   };
@@ -28,8 +27,12 @@ function loadConfig() {
  * Format and send the email
  */
 async function sendParentAlert({ recipientEmail = null, url = 'Nespecificat', reason = 'Conținut neadecvat', matches = 'Niciun termen specific', timestamp = null }) {
+  if (!recipientEmail) {
+    throw new Error('Lipsește adresa de email a părintelui (recipientEmail nespecificat).');
+  }
+
   const config = loadConfig();
-  const targetRecipient = recipientEmail || config.recipientEmail || 'luca.culcean@gmail.com';
+  const targetRecipient = recipientEmail;
   const timeStr = timestamp || new Date().toLocaleString('ro-RO', { timeZone: 'Europe/Bucharest' });
 
   // Clean domain extraction for subject
@@ -214,6 +217,7 @@ if (args.includes('--server')) {
   startServer(config.serverPort || 3001);
 } else if (args.includes('--test')) {
   sendParentAlert({
+    recipientEmail: 'luca.culcean@gmail.com',
     url: 'https://example-test-site.com/mature-content',
     reason: 'Illicit imagery or explicit text detected',
     matches: 'erotic photo, adult terms'

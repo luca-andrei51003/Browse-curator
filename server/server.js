@@ -18,15 +18,18 @@ function loadConfig() {
   }
   return {
     senderEmail: 'luca.culcean@gmail.com',
-    recipientEmail: 'luca.culcean@gmail.com',
     gmailAppPassword: process.env.GMAIL_APP_PASSWORD || '',
     port: parseInt(process.env.PORT, 10) || 3001
   };
 }
 
 async function sendParentAlert({ recipientEmail = null, url = 'Nespecificat', reason = 'Conținut neadecvat', matches = 'Niciun termen specific', timestamp = null }) {
+  if (!recipientEmail) {
+    throw new Error('Lipsește adresa de email a părintelui (recipientEmail nespecificat de extensie).');
+  }
+
   const config = loadConfig();
-  const targetRecipient = recipientEmail || config.recipientEmail || 'luca.culcean@gmail.com';
+  const targetRecipient = recipientEmail;
   const timeStr = timestamp || new Date().toLocaleString('ro-RO', { timeZone: 'Europe/Bucharest' });
 
   let domain = url;
