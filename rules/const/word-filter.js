@@ -21,13 +21,12 @@
     // Extreme violence / illegal harm
     'child exploitation', 'child porn', 'snuff video', 'suicide tutorial', 'suicide method',
     'how to make a bomb',
-    'fuck', 'fucking', 'fucker', 'motherfucker',
-    'cunt', 'dick', 'cock', 'pussy', 'whore', 'slut', 'milf',
+    'milf',
     'nigger', 'faggot',
     // Sensual / mature keywords
-    'nude', 'nudity', 'naked pictures', 'sex tape', 'erotic photo',
+    'naked pictures', 'sex tape', 'erotic photo',
     'topless', 'horny', 'orgasm', 'masturbation', 'escort service',
-    'penis', 'vagina', 'dildo', 'vibrator', 'boobs', 'tits',
+    'penis', 'vagina', 'dildo', 'boobs', 'tits',
 
     // --- Romanian Equivalents (cu & fără diacritice) ---
     // Conținut explicit / pornografic
@@ -40,27 +39,22 @@
     'video snuff', 'tutorial sinucidere', 'metoda sinucidere', 'metodă sinucidere',
     'cum sa faci o bomba', 'cum să faci o bombă',
     // Injurii severe / termeni vulgari
-    'fute', 'futere', 'futut', 'futu-te', 'fute-te', 'futu-ti', 'futu-ți', 'mata', 'mă-ta',
-    'pula', 'pulă', 'pizda', 'pizdă', 'coi', 'coaie',
-    'curva', 'curvă', 'curve', 'tarfa', 'târfă', 'tarfe', 'târfe',
-    'poponar', 'bulangiu', 'cioroi',
+    'fute', 'futere', 'futut', 'futu-te', 'fute-te', 'futu-ti', 'futu-ți',
+    'pula', 'pulă', 'pizda', 'pizdă',
+    'tarfa', 'târfă', 'tarfe', 'târfe',
     // Termeni maturi / senzuali
-    'nud', 'nuditate', 'poze goale', 'poze nud', 'video porno', 'fara haine', 'fără haine',
+    'poze goale', 'poze nud', 'video porno', 'fara haine', 'fără haine',
     'banda sexuala', 'bandă sexuală', 'filmare porno', 'excitat', 'excitata', 'excitată',
-    'masturbare', 'masturbat', 'laba', 'labă',
+    'masturbare', 'masturbat',
     'servicii escorte', 'servicii de escorta', 'servicii de escortă',
-    'vagin', 'tate', 'țâțe', 'san', 'sani', 'sâni'
+    'vagin'
   ];
 
   // Moderate terms: profanity, vulgarity, hate speech, vulgar slurs, illicit imagery indicators
   const MODERATE_TERMS = [
     // --- English Terms ---
-    'shit', 'bullshit', 'bitch', 'bitches', 'bastard', 'asshole', 'retard', 'nigga',
 
     // --- Romanian Equivalents (cu & fără diacritice) ---
-    'cacat', 'căcat', 'de cacat', 'de căcat',
-    'panarama', 'panaramă',
-    'gaozar', 'găozar'
   ];
 
   // Image alt/src suspicious keywords
