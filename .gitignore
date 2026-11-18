@@ -1,0 +1,8 @@
+# SSH keys and secrets - never commit
+server/BROWSE_CURATOR_SSH_GCP_KEY
+server/BROWSE_CURATOR_SSH_GCP_KEY.pub
+*.pem
+*.key
+server/config.json
+scripts/email-config.json
+.env

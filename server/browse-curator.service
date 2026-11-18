@@ -4,12 +4,17 @@ After=network.target
 
 [Service]
 Type=simple
-User=root
+User=browsecurator
 WorkingDirectory=/opt/browse-curator-server
 ExecStart=/usr/bin/node /opt/browse-curator-server/server.js
 Restart=always
 RestartSec=5
-Environment=PORT=3001
+# Secrets live here (chmod 600): PORT, API_KEY, SENDER_EMAIL, GMAIL_APP_PASSWORD
+EnvironmentFile=/etc/browse-curator.env
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target

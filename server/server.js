@@ -17,7 +17,7 @@ function loadConfig() {
     console.error('Error reading config.json:', e);
   }
   return {
-    senderEmail: 'luca.culcean@gmail.com',
+    senderEmail: '',
     gmailAppPassword: process.env.GMAIL_APP_PASSWORD || '',
     port: parseInt(process.env.PORT, 10) || 3001
   };
@@ -26,6 +26,11 @@ function loadConfig() {
 async function sendParentAlert({ recipientEmail = null, url = 'Nespecificat', reason = 'Conținut neadecvat', matches = 'Niciun termen specific', timestamp = null }) {
   if (!recipientEmail) {
     throw new Error('Lipsește adresa de email a părintelui (recipientEmail nespecificat de extensie).');
+  }
+
+  // Plain address only: blocks CR/LF injection into the raw SMTP commands
+  if (typeof recipientEmail !== 'string' || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(recipientEmail)) {
+    throw new Error('Adresă de email invalidă.');
   }
 
   const config = loadConfig();
@@ -103,10 +108,10 @@ async function sendParentAlert({ recipientEmail = null, url = 'Nespecificat', re
     </html>
   `;
 
-  const appPassword = config.gmailAppPassword || process.env.GMAIL_APP_PASSWORD;
+  const appPassword = process.env.GMAIL_APP_PASSWORD || config.gmailAppPassword;
 
   return await sendGmail({
-    senderEmail: config.senderEmail,
+    senderEmail: process.env.SENDER_EMAIL || config.senderEmail,
     appPassword: appPassword,
     recipientEmail: targetRecipient,
     subject: subject,
@@ -116,7 +121,16 @@ async function sendParentAlert({ recipientEmail = null, url = 'Nespecificat', re
 }
 
 const config = loadConfig();
-const PORT = config.port || 3001;
+const PORT = parseInt(process.env.PORT, 10) || config.port || 3001;
+
+// Shared secret: the extension must call /api/notify?key=<API_KEY>.
+// Without it, anyone who finds the VM's IP could send email from your Gmail.
+const API_KEY = process.env.API_KEY || config.apiKey || '';
+if (!API_KEY) {
+  console.error('API_KEY is not set. Refusing to start an open mail relay.');
+  process.exit(1);
+}
+const MAX_BODY_BYTES = 16 * 1024;
 
 const server = http.createServer(async (req, res) => {
   // CORS Headers allowing extension from any browser instance
@@ -139,10 +153,27 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Notification API endpoint
-  if (req.method === 'POST' && req.url === '/api/notify') {
+  const reqUrl = new URL(req.url, 'http://localhost');
+  if (req.method === 'POST' && reqUrl.pathname === '/api/notify') {
+    if (reqUrl.searchParams.get('key') !== API_KEY) {
+      res.statusCode = 401;
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify({ status: 'error', message: 'Unauthorized' }));
+      return;
+    }
     let body = '';
-    req.on('data', chunk => { body += chunk; });
+    let tooLarge = false;
+    req.on('data', chunk => {
+      body += chunk;
+      if (body.length > MAX_BODY_BYTES) {
+        tooLarge = true;
+        res.statusCode = 413;
+        res.end('Payload Too Large');
+        req.destroy();
+      }
+    });
     req.on('end', async () => {
+      if (tooLarge) return;
       try {
         const data = JSON.parse(body || '{}');
         console.log(`[${new Date().toISOString()}] Primită alertă blocare pentru: ${data.url || 'necunoscut'}`);

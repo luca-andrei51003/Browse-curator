@@ -8,7 +8,7 @@ function sendGmail({ senderEmail, appPassword, recipientEmail, subject, text, ht
     }
 
     const cleanPass = appPassword.replace(/\s+/g, '');
-    const socket = tls.connect(465, 'smtp.gmail.com', { rejectUnauthorized: false }, () => {
+    const socket = tls.connect(465, 'smtp.gmail.com', { servername: 'smtp.gmail.com' }, () => {
       // Connected
     });
 

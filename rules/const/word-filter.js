@@ -58,9 +58,8 @@
     'shit', 'bullshit', 'bitch', 'bitches', 'bastard', 'asshole', 'retard', 'nigga',
 
     // --- Romanian Equivalents (cu & fără diacritice) ---
-    'rahat', 'cacat', 'căcat', 'de cacat', 'de căcat',
-    'rahaturi', 'panarama', 'panaramă',
-    'nemernic', 'ticalos', 'ticălos',
+    'cacat', 'căcat', 'de cacat', 'de căcat',
+    'panarama', 'panaramă',
     'gaozar', 'găozar'
   ];
 
